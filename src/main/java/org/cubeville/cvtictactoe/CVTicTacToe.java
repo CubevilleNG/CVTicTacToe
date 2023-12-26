@@ -62,9 +62,7 @@ public class CVTicTacToe extends JavaPlugin implements Listener, CommandExecutor
         }
         if(args.length == 1 && (args[0].equalsIgnoreCase("red") || args[0].equalsIgnoreCase("blue"))) {
             Location blockLoc = ((Player) sender).getTargetBlock(transparent, 15).getLocation();
-            //System.out.println(blockLoc);
             blockLoc.add(0, 1, 0);
-            //System.out.println(blockLoc);
             setTile(blockLoc, args[0].equalsIgnoreCase("red"));
             return true;
         }
@@ -85,10 +83,8 @@ public class CVTicTacToe extends JavaPlugin implements Listener, CommandExecutor
         if(grid.contains(blockLoc)) {
             e.setCancelled(true);
             if(e.getAction().equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-                //System.out.println("Left Clicked for loc: " + blockLoc);
                 setTile(blockLoc, true);
             } else if(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                //System.out.println("Right Clicked for loc: " + blockLoc);
                 setTile(blockLoc, false);
             }
         }
@@ -96,8 +92,6 @@ public class CVTicTacToe extends JavaPlugin implements Listener, CommandExecutor
 
     public boolean playerInPlayArea(Player player) {
         Location pLoc = player.getLocation();
-        //System.out.println(pLoc.getWorld());
-        //System.out.println(playAreaMin.getWorld());
         return pLoc.getWorld().equals(playAreaMin.getWorld()) &&
                 pLoc.getX() >= playAreaMin.getX() && pLoc.getX() <= playAreaMax.getX() &&
                 pLoc.getY() >= playAreaMin.getY() && pLoc.getY() <= playAreaMax.getY() &&
@@ -106,10 +100,7 @@ public class CVTicTacToe extends JavaPlugin implements Listener, CommandExecutor
     }
 
     public void setTile(Location blockLoc, Boolean isRed) {
-        //System.out.println("attempting to set tile");
-        //System.out.println(blockLoc.toString());
         if(grid.contains(blockLoc)) {
-            //System.out.println("Attempted location contained in allowed set");
             blockLoc.getWorld().setType(blockLoc, isRed ? Material.RED_WOOL : Material.BLUE_WOOL);
         }
     }
